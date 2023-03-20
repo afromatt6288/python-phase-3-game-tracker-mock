@@ -1,7 +1,8 @@
-from classes.result import Result
+from .result import Result
 
 class Player:
 
+    results_from_Result = Result.all
     all = []
 
     def __init__(self, username):
@@ -18,33 +19,56 @@ class Player:
         else:
             print(f"Creating Player {username}!")
             self._username = username
+            self.player_results_list = []
+            self.add_to_player_results(self)
+            self.games_played_list = []
+            self.add_to_games_played()
             Player.add_to_player_list(self)
     
     username = property(get_username, set_username)
 
+    def results(self):
+        return self.player_results_list
+    
+    def games_played(self):
+        return self.games_played_list
+
     @classmethod
     def add_to_player_list(cls, self):
         cls.all.append(self)
-        print(cls.all)
+        # print(f"All Player Objects: {cls.all}")
 
-        
-
-    def results(self):
-        # TODO: Implement this method
-        pass
-
-    def games_played(self):
-        # TODO: Implement this method
-        pass
-
-    def played_game(self, game):
-        # TODO: Implement this method
-        pass
+    @classmethod
+    def add_to_player_results(cls, self):
+        for result in cls.results_from_Result:
+            if result.player == self.username:
+                self.player_results_list.append(result)
+        # print(f"This players Result Instances {self.player_results_list}")
+    
+    # @classmethod
+    # def add_to_games_played(cls, self):
+    #     for result in cls.results_from_Result:
+    #         if result.player == self.username:
+    #             self.games_played_list.append(result.game)
+        # print(f"This players games played: {self.games_played_list}")
+    
+    def add_to_games_played(self):
+        for result in self.player_results_list:
+            self.games_played_list.append(result.game)
+    
+    @classmethod
+    def played_game(cls, self, game):
+        if game in self.games_played_list:
+            return True
+        else:
+            return False
 
     def num_times_played(self, game):
-        # TODO: Implement this method
-        pass
+        num_times = 0
+        for n in range(self.games_played_list):
+            if game == self.games_played_list[n]:
+                num_times += 1
+        return num_times
 
     def add_result(self, game, score):
-        # TODO: Implement this method
-        pass
+        new_result = Result(self.username, game, score)
