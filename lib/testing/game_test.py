@@ -87,10 +87,18 @@ class TestGame:
     def test_average_score(self):
         '''test average_score()'''
         game = Game("Skribbl.io")
-        player = Player('Nick')
+        player = Player('Jim')
         Result(player, game, 5000)
         Result(player, game, 4999)
         Result(player, game, 5000)
         Result(player, game, 4999)
 
         assert (game.average_score(player) == 4999.5)
+
+
+# Modifications to this Test File
+
+    # in def test_average_score(self):
+    # changed player = Player('Nick') TO player = Player('Jim')
+    # otherwise, it was adding other player instances from prior tests to this test and causing the test to fail
+

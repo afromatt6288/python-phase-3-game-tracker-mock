@@ -46,7 +46,7 @@ class TestPlayer:
     def test_has_many_results(self):
         '''Player has many results.'''
         game = Game("Skribbl.io")
-        player = Player('Saaammmm')
+        player = Player('Bob')
         player_2 = Player('ActuallyTopher')
         result_1 = Result(player, game, 2000)
         result_2 = Result(player, game, 3500)
@@ -113,8 +113,8 @@ class TestPlayer:
         '''how many times has the player played the game'''
         game = Game("Skribbl.io")
         game_2 = Game("Scattegories")
-        player = Player('Saaammmm')
-        player_2 = Player('ActuallyTopher')
+        player = Player('Steeeeeeeveee')
+        player_2 = Player('ActuallyThomas')
         Result(player, game, 2000)
         Result(player, game_2, 19)
         Result(player, game, 1900)
@@ -128,7 +128,7 @@ class TestPlayer:
     def test_add_result(self):
         '''Player's result was created.'''
         game = Game("Skribbl.io")
-        player = Player('Saaammmm')
+        player = Player('Gregory')
         result_1 = Result(player, game, 2000)
         result_2 = Result(player, game, 5000)
 
@@ -139,3 +139,9 @@ class TestPlayer:
         assert (player.results()[2].game == game)
 
     # need test for highest_scored classmethod
+
+
+# Modifications to this Test File
+    # in def test_has_many_results(self):
+    # changed player = Player('Saaammmm') TO player = Player('Jim')
+    # otherwise, it was adding other game instances from prior tests to this test and causing the test to fail
